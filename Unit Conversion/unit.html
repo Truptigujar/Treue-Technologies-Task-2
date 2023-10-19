@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 10px;
+        }
+
+        #length-input {
+            width: 200px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        #unit-select {
+            font-size: 16px;
+            padding: 8px;
+        }
+
+        #convert-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Length Converter</h1>
+        <input type="number" id="length-input" placeholder="Enter length in meters">
+        <select id="unit-select">
+            <option value="centimeters">Meters to Centimeters</option>
+            <option value="kilometers">Meters to Kilometers</option>
+            <option value="millimeters">Meters to Millimeters</option>
+        </select>
+        <button id="convert-button">Convert</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById("convert-button").addEventListener("click", function () {
+            // Get the input value and selected unit
+            const lengthInMeters = parseFloat(document.getElementById("length-input").value);
+            const selectedUnit = document.getElementById("unit-select").value;
+
+            // Perform the conversion
+            let convertedLength;
+            switch (selectedUnit) {
+                case "centimeters":
+                    convertedLength = lengthInMeters * 100;
+                    break;
+                case "kilometers":
+                    convertedLength = lengthInMeters / 1000;
+                    break;
+                case "millimeters":
+                    convertedLength = lengthInMeters * 1000;
+                    break;
+                default:
+                    convertedLength = "Invalid unit";
+            }
+
+            // Display the result
+            const resultElement = document.getElementById("result");
+            if (!isNaN(convertedLength)) {
+                resultElement.textContent = `${lengthInMeters} meters is ${convertedLength} ${selectedUnit}`;
+            } else {
+                resultElement.textContent = "Please enter a valid number.";
+            }
+        });
+    </script>
+</body>
+</html>
